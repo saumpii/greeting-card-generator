@@ -8,6 +8,8 @@ import DesignTab from './design-tab';
 import PreviewTab from './preview-tab';
 
 const GreetingCardGenerator = () => {
+
+    
     const [formData, setFormData] = useState({
         relationship: '',
         occasion: '',

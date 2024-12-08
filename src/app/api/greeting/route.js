@@ -22,6 +22,8 @@ const generateMessagePrompt = (occasion, relationship, recipientName, context, i
       
       Requirements:
       - Keep the message between 2-3 impactful sentences
+      - Do not mention that this is a greeting card or message
+      - Write ONLY the message that would appear in the card, nothing else
       - Maximum 200 characters
       - Make it warm and personal
       - Avoid lengthy descriptions
