@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download, Share2, RefreshCw, Loader2 } from 'lucide-react';
 import html2canvas from 'html2canvas';
-
 import {
   Tabs,
   TabsContent,
@@ -60,7 +59,10 @@ const GreetingCardGenerator = () => {
   const [formData, setFormData] = useState({
     relationship: '',
     occasion: '',
-    additionalText: '',
+    recipientName: '',
+    isGeneric: false,
+    memories: '',
+    additionalNote: '',
     senderName: '',
     includeName: false,
     uploadedImage: null,
@@ -85,7 +87,16 @@ const GreetingCardGenerator = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          occasion: formData.occasion,
+          relationship: formData.relationship,
+          recipientName: formData.recipientName,
+          isGeneric: formData.isGeneric,
+          context: {
+            memories: formData.memories,
+            additionalNote: formData.additionalNote
+          }
+        })
       });
 
       if (!response.ok) {
@@ -104,9 +115,13 @@ const GreetingCardGenerator = () => {
   };
 
   React.useEffect(() => {
-    if (!currentMessage && formData.occasion && formData.relationship) {
-      generateMessage();
-    }
+    const generateInitialMessage = async () => {
+      if (!currentMessage && formData.occasion && formData.relationship) {
+        await generateMessage();
+      }
+    };
+    
+    generateInitialMessage();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.occasion, formData.relationship]);
 
@@ -218,9 +233,9 @@ const GreetingCardGenerator = () => {
                         <p className={`${cardDimensions[formData.format].textSize} mb-6 leading-relaxed`}>
                           {currentMessage}
                         </p>
-                        {formData.additionalText && (
+                        {formData.additionalNote && (
                           <p className="text-sm italic mt-4 border-t pt-4">
-                            {formData.additionalText}
+                            {formData.additionalNote}
                           </p>
                         )}
                       </div>

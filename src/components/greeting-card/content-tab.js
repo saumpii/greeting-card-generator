@@ -30,12 +30,12 @@ const occasions = [
   'New Job'
 ];
 
-const ContentTab = ({ formData, onUpdate, onGenerate }) => {
+const ContentTab = ({ formData, onUpdate }) => {
   return (
     <Card>
       <CardContent className="space-y-4 pt-6">
         <div className="space-y-2">
-        <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2">
             <Checkbox
               id="useGenericMessage"
               checked={formData.isGeneric}
@@ -51,14 +51,15 @@ const ContentTab = ({ formData, onUpdate, onGenerate }) => {
           
           {!formData.isGeneric && (
             <div className="space-y-2 mt-2">
-              <Label>Recipient's Name</Label>
+              <Label>Recipient&apos;s Name</Label>
               <Input
                 value={formData.recipientName}
                 onChange={(e) => onUpdate('recipientName', e.target.value)}
-                placeholder="Enter recipient's name"
+                placeholder="Enter recipient&apos;s name"
               />
             </div>
           )}
+
           <Label>Relationship</Label>
           <Select 
             value={formData.relationship}
@@ -91,6 +92,7 @@ const ContentTab = ({ formData, onUpdate, onGenerate }) => {
             </SelectContent>
           </Select>
         </div>
+
         <div className="space-y-4 border-t pt-4">
           <h3 className="font-medium text-sm text-gray-700">Message Context</h3>
           
@@ -115,14 +117,13 @@ const ContentTab = ({ formData, onUpdate, onGenerate }) => {
           </div>
         </div>
 
-     
         <div className="flex items-center space-x-2">
           <Checkbox
             id="includeName"
             checked={formData.includeName}
             onCheckedChange={(checked) => onUpdate('includeName', checked)}
           />
-          <Label htmlFor="includeName">Include sender's name</Label>
+          <Label htmlFor="includeName">Include sender&apos;s name</Label>
         </div>
 
         {formData.includeName && (
@@ -135,8 +136,6 @@ const ContentTab = ({ formData, onUpdate, onGenerate }) => {
             />
           </div>
         )}
-
-
       </CardContent>
     </Card>
   );
