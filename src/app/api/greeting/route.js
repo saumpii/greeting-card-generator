@@ -11,33 +11,32 @@ const anthropic = new Anthropic({
 });
 
 const generateMessagePrompt = (occasion, relationship, recipientName, context, isGeneric) => {
-    const { memories, futureWishes, additionalText, additionalNote } = context;
+    const { memories, additionalNote } = context;
   
-    let prompt = `Write a heartfelt ${occasion} message ${isGeneric ? `for a ${relationship}` : `for ${recipientName} (a ${relationship})`}.
+    let prompt = `Generate a heartfelt ${occasion} message ${isGeneric ? `for a ${relationship}` : `for ${recipientName} (a ${relationship})`}.
   
-      Context to incorporate:
-      ${memories ? `- Shared memories: ${memories}` : ''}
-      ${futureWishes ? `- Future wishes/plans: ${futureWishes}` : ''}
-      ${additionalText ? `- Additional context: ${additionalText}` : ''}
+      Primary Context to Focus on:
+      ${memories ? `- KEY CONTEXT: ${memories}
+        This context should be the main theme/focus of the message.` : ''}
       
-      Requirements:
-      - Keep the message between 2-3 impactful sentences
-      - Do not mention that this is a greeting card or message
-      - Write ONLY the message that would appear in the card, nothing else
-      - Maximum 200 characters
-      - Make it warm and personal
-      - Avoid lengthy descriptions
-      - Include specific references to the provided memories and wishes if given
-      - Make it emotionally resonant and meaningful
-      - Include appropriate emojis throughout the message
+      Message Requirements:
+      - Heavily incorporate the provided context into the message's main body
+      - Keep the message length to 2-3 impactful sentences
+      - Make it personal and emotional
+      - Include 2-3 appropriate emojis
       - ${isGeneric ? 'Keep it generic without using names' : `Include "${recipientName}" naturally in the message`}
-      ${additionalNote ? `- Add this as a separate line at the end: "${additionalNote}"` : ''}
       
-      Format the message with proper spacing and line breaks for better readability.`;
+      ${additionalNote ? `After the main message, add this as a distinctly separate line:
+      "${additionalNote}"` : ''}
+  
+      Note: Focus heavily on the provided context in the main message body. The message should feel like it's specifically written based on the given context.
+  
+      Example Format:
+      [Main message incorporating the primary context]
+      [Separate line with additional note if provided]`;
   
     return prompt;
   };
-
 export async function POST(request) {
   try {
     const body = await request.json();

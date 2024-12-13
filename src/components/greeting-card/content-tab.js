@@ -95,21 +95,11 @@ const ContentTab = ({ formData, onUpdate, onGenerate }) => {
           <h3 className="font-medium text-sm text-gray-700">Message Context</h3>
           
           <div className="space-y-2">
-            <Label>Special Memories/Moments</Label>
+            <Label>Some additional input/context for personalized message</Label>
             <Textarea
               value={formData.memories}
               onChange={(e) => onUpdate('memories', e.target.value)}
-              placeholder="Share some special memories or moments you'd like to reference in the message..."
-              className="min-h-[80px]"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label>Future Wishes/Plans</Label>
-            <Textarea
-              value={formData.futureWishes}
-              onChange={(e) => onUpdate('futureWishes', e.target.value)}
-              placeholder="Any specific wishes or future plans you'd like to mention..."
+              placeholder="Share some special memories or moments you&apos;d like to reference..."
               className="min-h-[80px]"
             />
           </div>
@@ -119,22 +109,13 @@ const ContentTab = ({ formData, onUpdate, onGenerate }) => {
             <Textarea
               value={formData.additionalNote}
               onChange={(e) => onUpdate('additionalNote', e.target.value)}
-              placeholder="This will appear as a separate line at the bottom of the message..."
+              placeholder="Any specific wishes or plans you&apos;d like to mention..."
               className="min-h-[80px]"
             />
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label>Additional Message (Optional)</Label>
-          <Textarea
-            value={formData.additionalText}
-            onChange={(e) => onUpdate('additionalText', e.target.value)}
-            placeholder="Add your personal message..."
-            className="min-h-[100px]"
-          />
-        </div>
-
+     
         <div className="flex items-center space-x-2">
           <Checkbox
             id="includeName"
