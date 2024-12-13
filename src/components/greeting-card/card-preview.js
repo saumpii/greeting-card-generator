@@ -79,7 +79,7 @@ const GreetingCardGenerator = () => {
     if (!formData.occasion || !formData.relationship) {
       return null;
     }
-
+  
     setIsLoading(true);
     try {
       const response = await fetch('/api/greeting', {
@@ -98,17 +98,20 @@ const GreetingCardGenerator = () => {
           }
         })
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate message');
-      }
-
+  
       const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to generate message');
+      }
+  
       setCurrentMessage(data.message);
       return data.message;
     } catch (error) {
-      console.error('Error:', error);
-      return `Happy ${formData.occasion}! Wishing you all the best! 🎉`;
+      console.error('Error details:', error);
+      // Show error to user
+      alert('Failed to generate message. Please try again.');
+      return null;
     } finally {
       setIsLoading(false);
     }
