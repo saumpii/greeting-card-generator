@@ -23,12 +23,66 @@ const relationships = [
   'Partner'
 ];
 
-const occasions = [
-  'Birthday',
-  'Wedding',
-  'Graduation',
-  'New Job'
-];
+const occasionsData = {
+  "Religious Festivals": [
+    { value: 'diwali', label: 'Diwali - Festival of Lights' },
+    { value: 'holi', label: 'Holi - Festival of Colors' },
+    { value: 'raksha-bandhan', label: 'Raksha Bandhan' },
+    { value: 'ganesh-chaturthi', label: 'Ganesh Chaturthi' },
+    { value: 'navratri', label: 'Navratri' },
+    { value: 'dussehra', label: 'Dussehra' },
+    { value: 'janmashtami', label: 'Krishna Janmashtami' },
+    { value: 'maha-shivratri', label: 'Maha Shivratri' },
+    { value: 'ram-navami', label: 'Ram Navami' },
+    { value: 'guru-purnima', label: 'Guru Purnima' },
+    { value: 'karwa-chauth', label: 'Karwa Chauth' },
+    { value: 'bhai-dooj', label: 'Bhai Dooj' },
+    { value: 'eid', label: 'Eid' },
+    { value: 'christmas', label: 'Christmas' },
+    { value: 'easter', label: 'Easter' },
+    { value: 'guru-nanak-jayanti', label: 'Guru Nanak Jayanti' }
+  ],
+  "Regional Festivals": [
+    { value: 'pongal', label: 'Pongal' },
+    { value: 'onam', label: 'Onam' },
+    { value: 'bihu', label: 'Bihu' },
+    { value: 'baisakhi', label: 'Baisakhi' },
+    { value: 'durga-puja', label: 'Durga Puja' },
+    { value: 'gudi-padwa', label: 'Gudi Padwa' },
+    { value: 'lohri', label: 'Lohri' },
+    { value: 'makar-sankranti', label: 'Makar Sankranti' },
+    { value: 'chhath-puja', label: 'Chhath Puja' },
+    { value: 'ugadi', label: 'Ugadi' },
+    { value: 'vishu', label: 'Vishu' },
+    { value: 'gangaur', label: 'Gangaur' }
+  ],
+  "Personal Celebrations": [
+    { value: 'birthday', label: 'Birthday' },
+    { value: 'wedding', label: 'Wedding' },
+    { value: 'anniversary', label: 'Anniversary' },
+    { value: 'engagement', label: 'Engagement' },
+    { value: 'baby-shower', label: 'Baby Shower' },
+    { value: 'house-warming', label: 'House Warming' },
+    { value: 'graduation', label: 'Graduation' },
+    { value: 'retirement', label: 'Retirement' }
+  ],
+  "Professional Milestones": [
+    { value: 'new-job', label: 'New Job' },
+    { value: 'promotion', label: 'Promotion' },
+    { value: 'work-anniversary', label: 'Work Anniversary' },
+    { value: 'business-launch', label: 'Business Launch' }
+  ],
+  "Other Occasions": [
+    { value: 'thank-you', label: 'Thank You' },
+    { value: 'congratulations', label: 'Congratulations' },
+    { value: 'get-well-soon', label: 'Get Well Soon' },
+    { value: 'farewell', label: 'Farewell' },
+    { value: 'welcome', label: 'Welcome' },
+    { value: 'missing-you', label: 'Missing You' }
+  ]
+};
+
+const occasions = Object.values(occasionsData).flat();
 
 const ContentTab = ({ formData, onUpdate }) => {
   return (
@@ -87,7 +141,7 @@ const ContentTab = ({ formData, onUpdate }) => {
             </SelectTrigger>
             <SelectContent>
               {occasions.map(occ => (
-                <SelectItem key={occ} value={occ}>{occ}</SelectItem>
+                <SelectItem key={occ.value} value={occ.value}>{occ.label}</SelectItem>
               ))}
             </SelectContent>
           </Select>
